@@ -704,6 +704,9 @@ def quarterConversion(qLen: OffsetQLIn) -> QuarterLengthConversion:
     # remove the largest type out there and keep going.
 
     qLenRemainder = opFrac(qLen - typeToDuration[closestSmallerType])
+    if qLenRemainder == 0.0:
+        return QuarterLengthConversion(tuple(components), None)
+
     # cannot recursively call, because tuplets are not possible at this stage.
     # environLocal.warn(['starting remainder search for qLen:', qLen,
     #    'remainder: ', qLenRemainder, 'components: ', components])
